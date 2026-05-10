@@ -43,6 +43,7 @@ public class KeyboardEventHandler implements IContainerInputHandler {
     public boolean lastKeyTyped(GuiContainer gui, char keyChar, int keyID) {
         if (keyBinding.getKeyCode() == keyID) {
             Slot slot = GuiContainerManager.getSlotMouseOver(gui);
+            if (slot == null) return false;
             int slotIdx = slot.getSlotIndex();
 
             EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
@@ -58,7 +59,7 @@ public class KeyboardEventHandler implements IContainerInputHandler {
 
                 if (stack != null && stack.getItem() instanceof ActivatableFromInventoryServerSide) {
                     NetworkMessageService.getInstance()
-                        .sentActivateItemMessage(new ActivateItemRequest(slot.getSlotIndex()));
+                        .sentActivateItemMessage(new ActivateItemRequest(slotIdx));
 
                     return true;
                 }
