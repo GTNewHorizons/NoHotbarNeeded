@@ -6,9 +6,9 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.xonich.mc.nohotbarneeded.NoHotbarNeeded;
 import net.xonich.mc.nohotbarneeded.api.ActivatableFromInventoryServerSide;
 import net.xonich.mc.nohotbarneeded.network.ActivateItemRequest;
-import net.xonich.mc.nohotbarneeded.network.NetworkMessageService;
 
 import org.lwjgl.input.Keyboard;
 
@@ -55,9 +55,7 @@ public class KeyboardEventHandler implements IContainerInputHandler {
                 ItemStack stack = slot.getStack();
 
                 if (stack != null && stack.getItem() instanceof ActivatableFromInventoryServerSide) {
-                    NetworkMessageService.getInstance()
-                        .sentActivateItemMessage(new ActivateItemRequest(slotIdx));
-
+                    NoHotbarNeeded.NETWORK.sentActivateItemMessage(new ActivateItemRequest(slotIdx));
                     return true;
                 }
             }

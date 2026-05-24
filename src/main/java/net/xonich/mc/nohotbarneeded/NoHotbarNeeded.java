@@ -1,5 +1,7 @@
 package net.xonich.mc.nohotbarneeded;
 
+import net.xonich.mc.nohotbarneeded.network.NetworkMessageService;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -13,6 +15,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 public class NoHotbarNeeded {
 
     public static final String MODID = "nohotbarneeded";
+    public static NetworkMessageService NETWORK;
 
     @SidedProxy(
         clientSide = "net.xonich.mc.nohotbarneeded.ClientProxy",
@@ -21,6 +24,7 @@ public class NoHotbarNeeded {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        NETWORK = new NetworkMessageService(MODID);
         proxy.init(event);
     }
 }
