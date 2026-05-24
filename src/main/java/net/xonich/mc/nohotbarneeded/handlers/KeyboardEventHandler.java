@@ -41,7 +41,8 @@ public class KeyboardEventHandler implements IContainerInputHandler {
 
     @Override
     public boolean lastKeyTyped(GuiContainer gui, char keyChar, int keyID) {
-        if (keyBinding.getKeyCode() == keyID) {
+        final int keyCode = keyBinding.getKeyCode();
+        if (keyCode != 0 && keyCode == keyID) {
             Slot slot = GuiContainerManager.getSlotMouseOver(gui);
             if (slot == null) return false;
             int slotIdx = slot.getSlotIndex();
