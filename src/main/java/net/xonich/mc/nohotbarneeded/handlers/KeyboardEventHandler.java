@@ -18,14 +18,10 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class KeyboardEventHandler implements IContainerInputHandler {
 
-    private static final String ACTIVATE_ITEM_EVENT = "gui.nohotbarneeded.activate_item";
     private final KeyBinding keyBinding;
 
     public KeyboardEventHandler() {
-        GuiContainerManager.addInputHandler(this);
-
         keyBinding = new KeyBinding("Activate item in inventory", Keyboard.KEY_G, "Miscellaneous");
-
         ClientRegistry.registerKeyBinding(keyBinding);
     }
 
