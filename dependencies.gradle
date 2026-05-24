@@ -35,5 +35,5 @@
  */
 dependencies {
     api("com.github.GTNewHorizons:NotEnoughItems:2.8.93-GTNH:dev")
-    devOnlyNonPublishable("com.github.GTNewHorizons:ForestryMC:4.11.19:dev")
+    devOnlyNonPublishable("com.github.GTNewHorizons:ForestryMC:4.11.26:dev")
 }
