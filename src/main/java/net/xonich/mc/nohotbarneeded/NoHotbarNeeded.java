@@ -14,6 +14,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
     modid = NoHotbarNeeded.MODID,
     version = Tags.VERSION,
     name = "NoHotbarNeeded",
+    dependencies = "required-after:NotEnoughItems@[2.8.93,);",
     acceptedMinecraftVersions = "[1.7.10]")
 public class NoHotbarNeeded {
 
