@@ -6,9 +6,9 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.xonich.mc.nohotbarneeded.NoHotbarNeeded;
 import net.xonich.mc.nohotbarneeded.api.ActivatableFromInventoryServerSide;
 import net.xonich.mc.nohotbarneeded.network.ActivateItemRequest;
-import net.xonich.mc.nohotbarneeded.network.NetworkMessageService;
 
 import org.lwjgl.input.Keyboard;
 
@@ -18,14 +18,10 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class KeyboardEventHandler implements IContainerInputHandler {
 
-    private static final String ACTIVATE_ITEM_EVENT = "gui.nohotbarneeded.activate_item";
     private final KeyBinding keyBinding;
 
     public KeyboardEventHandler() {
-        GuiContainerManager.addInputHandler(this);
-
         keyBinding = new KeyBinding("Activate item in inventory", Keyboard.KEY_G, "Miscellaneous");
-
         ClientRegistry.registerKeyBinding(keyBinding);
     }
 
@@ -41,7 +37,8 @@ public class KeyboardEventHandler implements IContainerInputHandler {
 
     @Override
     public boolean lastKeyTyped(GuiContainer gui, char keyChar, int keyID) {
-        if (keyBinding.getKeyCode() == keyID) {
+        final int keyCode = keyBinding.getKeyCode();
+        if (keyCode != 0 && keyCode == keyID) {
             Slot slot = GuiContainerManager.getSlotMouseOver(gui);
             if (slot == null) return false;
             int slotIdx = slot.getSlotIndex();
@@ -58,9 +55,7 @@ public class KeyboardEventHandler implements IContainerInputHandler {
                 ItemStack stack = slot.getStack();
 
                 if (stack != null && stack.getItem() instanceof ActivatableFromInventoryServerSide) {
-                    NetworkMessageService.getInstance()
-                        .sentActivateItemMessage(new ActivateItemRequest(slotIdx));
-
+                    NoHotbarNeeded.NETWORK.sentActivateItemMessage(new ActivateItemRequest(slotIdx));
                     return true;
                 }
             }
