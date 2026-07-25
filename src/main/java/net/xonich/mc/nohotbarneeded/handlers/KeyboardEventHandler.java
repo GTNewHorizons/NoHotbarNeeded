@@ -18,7 +18,9 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class KeyboardEventHandler implements IContainerInputHandler {
 
-    private final KeyBinding keyBinding;
+    public static final KeyboardEventHandler INSTANCE = new KeyboardEventHandler();
+
+    public final KeyBinding keyBinding;
 
     public KeyboardEventHandler() {
         keyBinding = new KeyBinding("Activate item in inventory", Keyboard.KEY_G, "Miscellaneous");
